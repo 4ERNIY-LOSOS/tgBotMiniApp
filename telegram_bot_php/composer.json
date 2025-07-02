@@ -1,0 +1,22 @@
+{
+    "name": "vendor_name/telegram_bot_php",
+    "description": "A simple Telegram bot in PHP.",
+    "type": "project",
+    "require": {
+        "php": ">=7.4",
+        "irazasyed/telegram-bot-sdk": "^3.9"
+    },
+    "authors": [
+        {
+            "name": "Your Name",
+            "email": "you@example.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "autoload": {
+        "psr-4": {
+            "App\\": "src/"
+        }
+    }
+}
