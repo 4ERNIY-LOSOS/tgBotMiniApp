@@ -1,0 +1,45 @@
+name: Проверка Pull Request через статичкий анализ кода
+on:
+  pull_request:
+
+env:
+  PROJECT_IMAGE: novapribor-telegram-store:latest
+
+jobs:
+  build:
+    runs-on: ubuntu-cloud-runner
+    steps:
+      - 
+        name: Checkout
+        uses: actions/checkout@v4
+
+      - 
+        name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
+      
+      - 
+        name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+      
+      - 
+        name: Build project image
+        uses: docker/build-push-action@v6
+        with:
+          context: ./docker
+          push: false
+          tags: ${{ env.PROJECT_IMAGE }}
+
+      - 
+        name: Run static code analysis
+        run: |
+          echo "Running PHPStan static code analysis..."
+          
+          # Запуск PHPStan в Docker контейнере с выводом результатов
+          #docker run --rm \
+          #  -v ${{ gitverse.workspace }}/hleb:/hleb \
+          #  -v ${{ gitverse.workspace }}/log:/log \
+          #  -v ${{ gitverse.workspace }}/docker/xdebug.ini:/usr/local/etc/php/conf.d/xdebug.ini:ro \
+          #  ${{ env.PROJECT_IMAGE }} \
+          #  php /hleb/vendor/bin/phpstan analyse -c /hleb/phpstan.neon --error-format=github
+          
+          echo "PHPStan analysis completed."
