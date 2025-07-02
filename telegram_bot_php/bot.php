@@ -9,10 +9,12 @@ use Telegram\Bot\Api;
 $telegram = new Api('YOUR_BOT_TOKEN');
 
 // Получаем входящее обновление (например, от вебхука)
+// Для корректной работы с вебхуками TUNA, убедитесь, что TUNA настроен
+// на перенаправление запросов на этот скрипт.
 $update = $telegram->getWebhookUpdate();
 
 // Проверяем, есть ли сообщение и текст в нем
-if ($update->getMessage() && $update->getMessage()->getText()) {
+if ($update && $update->getMessage() && $update->getMessage()->getText()) {
     $message = $update->getMessage();
     $chatId = $message->getChat()->getId();
     $text = $message->getText();
@@ -30,9 +32,7 @@ if ($update->getMessage() && $update->getMessage()->getText()) {
 // Важно: для работы через вебхуки, этот скрипт должен быть доступен через веб-сервер,
 // и адрес этого скрипта должен быть указан в настройках вебхука Telegram.
 // Например, https://yourdomain.com/path/to/telegram_bot_php/bot.php
-
-// Для TUNA, вам нужно будет настроить TUNA так, чтобы он перенаправлял запросы от Telegram
-// на этот скрипт, запущенный локально (возможно, через встроенный PHP веб-сервер или Docker).
+// TUNA будет предоставлять вам публичный URL, который нужно будет использовать.
 
 // Пример простого ответа, чтобы Telegram знал, что вебхук получен (не всегда обязательно, зависит от библиотеки)
 // http_response_code(200);
