@@ -41,5 +41,5 @@ Thumbs.db
 auth.json
 
 # Composer dependencies
-/vendor/
+
 composer.lock
